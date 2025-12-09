@@ -11,10 +11,11 @@ function Banner() {
               <span className="text-pink-500">new everyday!!!</span>
             </h1>
             <p className="text-xl">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia,
-              esse eius dolorem facilis atque nobis saepe cupiditate deleniti in
-              iste minima sed molestias repudiandae numquam minus ab reiciendis
-              dolorum vero.
+              Dive into a universe of stories right in your pocket. Our app is
+              curated for passionate readers, helping you discover hidden gems
+              and bestsellers across every genre imaginable. With personalized
+              recommendations, author insights, and a seamless reading
+              experience, your next literary adventure is just a tap away.
             </p>
             <label className="input validator">
               <svg
@@ -33,20 +34,23 @@ function Banner() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
               </svg>
-              <input type="email" placeholder="" required />
+              <input type="email" placeholder="Enter your Email" required />
             </label>
             <div className="validator-hint hidden">
               Enter valid email address
             </div>
           </div>
-          <button className="btn mt-3 btn-secondary">Secondary</button>
-
+          <button className="btn mt-3 btn-secondary">Get Started</button>
         </div>
         <div className="w-full md:w-1/2 order-1 flex justify-center items-center">
-        <img src={banner} className="w-3/4 max-w-[500px] object-contain" alt="" />
+          <img
+            src={banner}
+            className="w-3/4 max-w-[500px] object-contain"
+            alt=""
+          />
         </div>
       </div>
-    </> 
+    </>
   );
 }
 

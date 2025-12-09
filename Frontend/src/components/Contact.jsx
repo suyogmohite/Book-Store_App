@@ -1,94 +1,104 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-
-
-
+import Navbar from './Navbar';
 
 function Contact() {
-     const {
-          register,
-          handleSubmit,
-          formState: { errors },
-        } = useForm();
-      
-        const onSubmit = (data) => {
-          console.log("Form Data:", data);
-        };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Form Data:", data);
+  };
+
   return (
     <>
-    <div>
-        <form onSubmit={handleSubmit(onSubmit)} method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <Link
-                to="/"
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              >
-                ✕
-              </Link>
-         
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        {/* Navbar at top */}
+        <Navbar />
 
-          <h3 className="font-bold text-lg mt-6">Contact us</h3>
+        {/* Centered content */}
+        <div className="flex-1 flex items-center justify-center px-4 py-8">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="relative w-full max-w-md bg-white shadow-lg rounded-lg p-6 md:p-8"
+          >
+            {/* Close / Back Button */}
+            <Link
+              to="/"
+              className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3"
+            >
+              ✕
+            </Link>
 
-          {/* Name */}
-          <div className="mt-4 space-y-1">
-            <span>Name</span>
-            <input
-              type="text"
-              placeholder="Enter your Fullname"
-              className="outline-none w-full px-3 py-1 rounded-md border"
-              {...register("name", { required: true })}
-            />
-            <br />
+            <h3 className="font-bold text-xl mt-6 text-center md:text-left">
+              Contact us
+            </h3>
+
+            {/* Name */}
+            <div className="mt-4 space-y-1">
+              <span className="text-sm md:text-base">Name</span>
+              <input
+                type="text"
+                placeholder="Enter your Fullname"
+                className="outline-none w-full px-3 py-2 rounded-md border text-sm md:text-base"
+                {...register("name", { required: true })}
+              />
               {errors.name && (
-                <span className="text-sm text-red-500">
+                <span className="text-xs md:text-sm text-red-500">
                   This field is required
                 </span>
               )}
-          </div>
+            </div>
 
-          {/* Email */}
-          <div className="mt-4 space-y-1">
-            <span>Email</span>
-            <input
-              type="email"
-              placeholder="Enter your Email"
-              className="outline-none w-full px-3 py-1 rounded-md border"
-               {...register("email", { required: true })}
-            />
-            <br />
+            {/* Email */}
+            <div className="mt-4 space-y-1">
+              <span className="text-sm md:text-base">Email</span>
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                className="outline-none w-full px-3 py-2 rounded-md border text-sm md:text-base"
+                {...register("email", { required: true })}
+              />
               {errors.email && (
-                <span className="text-sm text-red-500">
+                <span className="text-xs md:text-sm text-red-500">
                   This field is required
                 </span>
               )}
-          </div>
+            </div>
 
-          {/* Message */}
-          <div className="mt-4 space-y-1">
-            <span>Message</span>
-            <input
-              type="text"
-              placeholder="Enter your Message"
-              className="outline-none w-full px-3 py-1 rounded-md border"
-              {...register("message", { required: true })}
-            />
-            <br />
+            {/* Message */}
+            <div className="mt-4 space-y-1">
+              <span className="text-sm md:text-base">Message</span>
+              <textarea
+                rows="4"
+                placeholder="Enter your Message"
+                className="outline-none w-full px-3 py-2 rounded-md border resize-none text-sm md:text-base"
+                {...register("message", { required: true })}
+              />
               {errors.message && (
-                <span className="text-sm text-red-500">
+                <span className="text-xs md:text-sm text-red-500">
                   This field is required
                 </span>
               )}
-          </div>
-          <div>
-            <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-700 duration-200">
-                Login
+            </div>
+
+            <div className="mt-6 flex justify-center md:justify-start">
+              <button
+                type="submit"
+                className="bg-pink-500 text-white rounded-md px-5 py-2 text-sm md:text-base hover:bg-pink-700 duration-200"
+              >
+                Submit
               </button>
-          </div>
+            </div>
           </form>
-    </div>
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

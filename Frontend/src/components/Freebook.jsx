@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import list from "../../public/list.json";
 import Slider from "react-slick";
 import Cards from "./Cards";
+import axios from "axios";
 
 function FreeBook() {
-  const filterData = list.filter((data) => data.category === "Free");
+  const [book, setBook] = useState([]);
 
-  var settings = {
+  useEffect(() => {
+    const getBook = async () => {
+      try {
+        const res = await axios.get("http://localhost:4001/book");
+        const data = res.data.filter((item) => item.category === "Free");
+        setBook(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getBook();
+  }, []);
+
+  const settings = {
     dots: true,
     infinite: false,
     speed: 500,
@@ -42,28 +56,25 @@ function FreeBook() {
       },
     ],
   };
+
   return (
-    <>
-      
-        <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 ">
-          <div>
-            <h1 className="font-semibold text-xl pb-2">Free Offered Courses</h1>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo
-              obcaecati ad libero corrupti id totam culpa, veniam ut numquam
-              nostrum? Voluptates laudantium voluptatibus dolorum, obcaecati
-              molestiae est? Dolores, fuga ex.
-            </p>
-          </div>
-        <div>
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
+      <div>
+        <h1 className="font-semibold text-xl pb-2">Free Offered Courses</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo obcaecati
+          ad libero corrupti id totam culpa.
+        </p>
+      </div>
+
+      <div className="mt-8">
         <Slider {...settings}>
-          {filterData.map((item) => (
-            <Cards item={item} key={item.id}/>
+          {book.map((item) => (
+            <Cards item={item} key={item._id} />
           ))}
         </Slider>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
 
